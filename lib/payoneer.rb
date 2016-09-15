@@ -48,7 +48,7 @@ module Payoneer
       p1: configuration.partner_username,
       p2: configuration.partner_api_password,
       p3: configuration.partner_id,
-      proxy: configuration.proxy_url,
+      proxy: configuration.proxy,
     }
   end
 end
