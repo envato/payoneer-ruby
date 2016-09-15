@@ -30,7 +30,12 @@ module Payoneer
 
     request_params = default_params.merge(mname: method_name).merge(params)
 
-    response = RestClient.post(configuration.api_url, request_params)
+    response = RestClient::Request.execute(
+      method: :post,
+      url: configuration.api_url,
+      payload: request_params,
+      proxy: configuration.proxy,
+    )
 
     fail Errors::UnexpectedResponseError.new(response.code, response.body) unless response.code == 200
 
@@ -48,7 +53,6 @@ module Payoneer
       p1: configuration.partner_username,
       p2: configuration.partner_api_password,
       p3: configuration.partner_id,
-      proxy: configuration.proxy,
     }
   end
 end
